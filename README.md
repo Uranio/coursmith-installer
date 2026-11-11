@@ -22,6 +22,15 @@ Everything is installed for the current user, under the home folder (`~/.coursmi
 Installers are attached to the [releases](../../releases): `.exe`/`.msi` for Windows, `.dmg` for macOS
 (Apple Silicon and Intel), `.AppImage`/`.deb`/`.rpm` for Linux.
 
+Stable links to the latest version:
+[Windows](https://github.com/Uranio/coursmith-installer/releases/latest/download/coursmith-setup-windows.exe) ·
+[macOS](https://github.com/Uranio/coursmith-installer/releases/latest/download/coursmith-setup-macos.dmg) ·
+[Linux AppImage](https://github.com/Uranio/coursmith-installer/releases/latest/download/coursmith-setup-linux.AppImage) ·
+[.deb](https://github.com/Uranio/coursmith-installer/releases/latest/download/coursmith-setup-linux.deb) ·
+[.rpm](https://github.com/Uranio/coursmith-installer/releases/latest/download/coursmith-setup-linux.rpm).
+
+This is a **beta**: please report problems with the text shown under *Show details* in the app.
+
 The installers are **not code-signed**, so the system warns the first time:
 
 - **Windows**: "Windows protected your PC" → *More info* → *Run anyway*.

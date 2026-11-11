@@ -62,7 +62,33 @@ jobs:
         with:
           tagName: ${{ github.ref_type == 'tag' && github.ref_name || 'v__VERSION__' }}
           releaseName: "Coursmith Setup v__VERSION__"
-          releaseBody: "Installers for Windows (.exe, .msi), macOS (.dmg, universal) and Linux (.AppImage, .deb, .rpm). They are not code-signed: see the README for how to open them."
+          releaseBody: "Installers for Windows (.exe, .msi), macOS (.dmg, universal) and Linux (.AppImage, .deb, .rpm). They are not code-signed: see the README for how to open them. The coursmith-setup-* files are the same installers under fixed names. Publish this draft to make it the latest release."
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
+
+  # Copies of the installers under fixed names, so the stable link
+  # https://github.com/Uranio/coursmith-installer/releases/latest/download/<name> always serves the newest version
+  # (the Coursmith install page links to these).
+  stable-names:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      TAG: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+    steps:
+      - name: Upload copies with fixed names
+        run: |
+          tag="${TAG:-v$(gh api repos/${{ github.repository }}/releases --jq '.[0].tag_name' | sed 's/^v//')}"
+          mkdir dl && cd dl
+          gh release download "$tag" -R ${{ github.repository }} -p "*-setup.exe" -p "*.dmg" -p "*.AppImage" -p "*.deb" -p "*.rpm"
+          cp ./*-setup.exe coursmith-setup-windows.exe
+          cp ./*.dmg coursmith-setup-macos.dmg
+          cp ./*.AppImage coursmith-setup-linux.AppImage
+          cp ./*.deb coursmith-setup-linux.deb
+          cp ./*.rpm coursmith-setup-linux.rpm
+          gh release upload "$tag" -R ${{ github.repository }} --clobber \
+            coursmith-setup-windows.exe coursmith-setup-macos.dmg coursmith-setup-linux.AppImage \
+            coursmith-setup-linux.deb coursmith-setup-linux.rpm
