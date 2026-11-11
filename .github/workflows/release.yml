@@ -50,7 +50,10 @@ jobs:
 
       - run: npm ci
 
+      # Tauri test binaries cannot start on Windows runners (STATUS_ENTRYPOINT_NOT_FOUND: no comctl32 v6 manifest),
+      # so the unit tests run on Linux and macOS; the Windows app itself is still built below.
       - name: Unit tests
+        if: runner.os != 'Windows'
         run: cargo test --manifest-path src-tauri/Cargo.toml
 
       - uses: tauri-apps/tauri-action@v0
