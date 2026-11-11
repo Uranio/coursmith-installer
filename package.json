@@ -1,0 +1,14 @@
+{
+  "name": "coursmith-installer",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Coursmith Setup: installs an AI agent, the Coursmith skill and connects your account.",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.12.4"
+  }
+}

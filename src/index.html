@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coursmith Setup</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand"><span class="mark" aria-hidden="true"></span>Coursmith Setup</div>
+      <ol class="steps" aria-label="Progress">
+        <li data-step="choose">Choose</li>
+        <li data-step="install">Install</li>
+        <li data-step="connect">Connect</li>
+        <li data-step="done">Ready</li>
+      </ol>
+    </header>
+
+    <main>
+      <!-- 1. Choose -->
+      <section id="choose" class="screen">
+        <h1>Which AI do you use?</h1>
+        <p class="lead">
+          Coursmith courses are written by an AI agent that runs on your computer. Pick the subscription you already
+          have: we install the matching agent, add the Coursmith skill and connect your account.
+        </p>
+        <div id="plans" class="cards"></div>
+        <details class="more">
+          <summary>I use something else</summary>
+          <div id="others" class="cards small"></div>
+        </details>
+        <p id="detect-note" class="note"></p>
+      </section>
+
+      <!-- 2. Install -->
+      <section id="install" class="screen" hidden>
+        <h1 id="install-title">Setting up</h1>
+        <p class="lead">Everything is installed for your user only, in your home folder. No administrator password is needed.</p>
+        <ul id="tasks" class="tasks"></ul>
+        <p id="install-error" class="error" role="alert" hidden></p>
+        <div class="actions">
+          <button id="install-back" class="ghost">Back</button>
+          <button id="install-retry" hidden>Try again</button>
+        </div>
+        <details class="log">
+          <summary>Show details</summary>
+          <pre id="log" aria-live="off"></pre>
+        </details>
+      </section>
+
+      <!-- 3. Connect -->
+      <section id="connect" class="screen" hidden>
+        <h1>Connect your Coursmith account</h1>
+        <p class="lead">
+          A Coursmith page opened in your browser. Log in or sign up there, check that it shows this code, then press
+          <strong>Approve</strong>.
+        </p>
+        <p id="code" class="code" aria-label="Login code">····-····</p>
+        <p id="connect-status" class="note">Waiting for your approval…</p>
+        <p id="connect-error" class="error" role="alert" hidden></p>
+        <div class="actions">
+          <button id="connect-open" class="ghost">Open the page again</button>
+          <button id="connect-retry" hidden>Start again</button>
+        </div>
+      </section>
+
+      <!-- 4. Done -->
+      <section id="done" class="screen" hidden>
+        <h1>You are ready</h1>
+        <p class="lead" id="done-lead"></p>
+        <ol class="howto">
+          <li>
+            <p><strong>Open your agent.</strong> It starts in your courses folder, <code id="workspace"></code>.</p>
+            <button id="open-agent">Open the agent</button>
+            <p id="open-note" class="note"></p>
+          </li>
+          <li>
+            <p><strong>Sign in to the agent</strong> the first time, with the account of your AI subscription.</p>
+          </li>
+          <li>
+            <p><strong>Ask for a course.</strong> For example:</p>
+            <p class="prompt" id="prompt">Use the coursmith-course skill to create a beginner course about the solar system</p>
+            <button id="copy" class="ghost">Copy</button>
+          </li>
+          <li>
+            <p>
+              The agent asks before running commands: <strong>allow the <code>npx coursmith</code> commands</strong>. It
+              shows you an outline, writes the course and submits it for review.
+            </p>
+          </li>
+        </ol>
+        <div class="actions">
+          <button id="open-dashboard" class="ghost">Open my dashboard</button>
+          <button id="restart" class="ghost">Set up another agent</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="main.js"></script>
+  </body>
+</html>
